@@ -1,0 +1,6 @@
+
+ <header-currency></header-currency>
+
+ <sticky-panel (popularCurrency)="getPopularCurrency($event)" (FormInfo)="getFormInfo($event)"></sticky-panel>
+
+  <currencies-cards [items]="resultCurrencyItems" [fromCurrencyInput]="dataFormObj"></currencies-cards>

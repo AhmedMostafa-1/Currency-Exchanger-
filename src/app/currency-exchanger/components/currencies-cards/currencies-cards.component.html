@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-4 " *ngFor='let item of items.slice(0,9); let i = index'>
+        <div class="card mt-5">
+            <div class="card-body">
+                {{fromCurrencyInput.amount | number : '1.2-2'}} {{fromCurrencyInput.from + ' ' + '='}} {{item?.text| number : '1.2-2'}} {{item.code}}
+            </div>
+          </div>
+    </div>
+
+</div>

@@ -1,0 +1,14 @@
+.card {
+    background: #323639;
+    height: 15rem;
+    width: 100%;
+    .card-body {
+        background: #41464b;
+        border-radius: 15px;
+        border: 1px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+    }
+}

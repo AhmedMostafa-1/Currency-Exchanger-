@@ -1,0 +1,58 @@
+
+  <div class="sticky-header" *ngIf="formUpdated">
+      <h4 class="text-center">{{newForm.get('from').value}}</h4>
+      <button class="btn btn-primary text-center" routerLink="/currency-exchanger">Back To Home</button>
+  </div>
+<form [formGroup]="newForm" >
+    <div class="row">
+      <div class="col-4">
+        <label for="from">Amount:</label>
+        <input type="number" class="form-control" formControlName="amount"  placeholder="Amount">
+      </div>
+      <div class="col-4">
+        <label for="from">From: </label>
+        <select class="form-control" id="from" formControlName="from"  placeholder="Select from"  >
+          <option [value]="symbol.code" *ngFor="let symbol of symbols"> {{ symbol.text }} ({{ symbol.code }}) </option>
+        </select>
+      </div>
+      <div class="col-1 text-center m-0">
+        <button class="switch-btn" (click)="changeExchangeInputValues()">
+        <img src="assets/imgs/opposite-arrows.png" alt="Arrow">
+        </button>
+      </div>
+      <div class="col-3">
+        <label for="to">To: </label>
+        <select
+        class="form-control" id="to" formControlName="to"  placeholder="Select to" >
+        <option [value]="symbol.code" *ngFor="let symbol of symbols">{{ symbol.text }} ({{ symbol.code }})</option>
+      </select>
+      </div>
+
+    </div>
+    <div class="row justify-content-end mt-3">
+        <div class="col-8">
+         <button class="btn btn-primary convert-btn" (click)="convert()" [disabled]="!newForm.valid">Convert</button>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col">
+            <ng-template [ngIf]="!cal" [ngIfElse]="calExist">
+                <span class="show-details">1. 00 EUR = XX XX USD</span>
+             </ng-template>
+             <ng-template #calExist>
+                <span class="show-details" *ngIf="cal">{{amount | number : '1.2-2'}} {{codeFromIndex + ' ' + '='}} {{cal| number : '1.2-2'}} {{codeToIndex}}</span>
+            </ng-template>
+        </div>
+        <div class="col-6">
+            <ng-template [ngIf]="!cal" [ngIfElse]="calExistCurrency">
+                <span class="show-details">XX XX USD</span>
+             </ng-template>
+             <ng-template #calExistCurrency>
+                <span class="show-details">{{cal| number : '1.2-2'}} {{codeToIndex}}</span>
+            </ng-template>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary convert-btn" *ngIf="(cal && !criteriesObj) || criteriesObj?.hideBtn" routerLink="/details">More Details</button>
+        </div>
+      </div>
+  </form>
